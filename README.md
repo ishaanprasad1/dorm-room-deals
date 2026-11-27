@@ -4,7 +4,7 @@ My app helps a college student on a tight budget decide which Steam game to buy 
 
 > A course project for **MIST 4600: Computer Programming in Business** at the University of Georgia's Terry College of Business (Fall 2026).
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ishaanprasad1/dorm-room-deals/blob/main/dorm_room_deals_REC.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ishaanprasad1/dorm-room-deals/blob/main/dorm_room_deals_RECENT.ipynb)
 
 ## Problem
 
@@ -18,19 +18,19 @@ The student types in three choices at the top of the notebook: a genre, a price 
 
 | # | Sub-question | What the app tells the student |
 |---|---|---|
-| 1 | **Fit:** which highly rated games (85%+ positive reviews) match the student's genre and price limit and run on their laptop (Windows, Mac, or Linux)? | `find_fits` keeps only games with at least 85% positive reviews, the student's genre, a price at or under their limit, and support for their system. It tells the student how many games fit and lists them (pandas). |
-| 2 | **Deals:** which of those games are on sale today, and how close is today's price to their lowest price ever? | `find_deals` takes the 5 best-reviewed paid games that fit and looks each one up in the CheapShark API by its Steam `appid`. Each game becomes a `DealPick` object that prints today's price, the regular price, and the lowest price ever, and the app lists the games on sale today. |
+| 1 | **Fit:** which highly rated games (85%+ positive reviews) match the student's genre and price limit and run on their laptop (Windows, Mac, or Linux)? | `find_fits` (with the helper `has_genre`) keeps only games with at least 85% positive reviews, the student's genre, a price at or under their limit, and support for their system. It tells the student how many games fit and lists them (pandas). |
+| 2 | **Deals:** which of those games are on sale today, and how close is today's price to their lowest price ever? | `find_deals` takes the 5 best-reviewed paid games that fit and uses `.apply` with `get_today` and `get_lowest_ever` to look each one up in the CheapShark API by its Steam `appid`. Each game becomes a `DealPick` object that prints today's price, the regular price, and the lowest price ever, and the app lists the games on sale today. |
 | 3 | **Hidden gems:** which of them are lesser known (under 1 million owners) but rated as highly by players as the big hits? | `compare_hidden_gems` splits the games that fit into hidden gems (under 1 million owners) and big hits, compares the two groups' average positive reviews, and lists the 5 best-reviewed hidden gems (pandas). |
 
 **Together:** a recommendation of which game to buy this week: a well-reviewed game that fits the student's genre, budget, and laptop and is on sale today, or, if none is on sale, a hidden gem.
 
 ## How to run it
 
-1. Click **Open in Colab** above, or open `dorm_room_deals_REC.ipynb` from this repository in [Google Colab](https://colab.research.google.com).
+1. Click **Open in Colab** above, or open `dorm_room_deals_RECENT.ipynb` from this repository in [Google Colab](https://colab.research.google.com).
 2. Put `steam_games.csv` (in this repository) in your Google Drive, in My Drive or a folder inside it. The setup cell finds it automatically.
 3. No API key is needed: the [CheapShark API](https://apidocs.cheapshark.com/) is free and works without one, so there is nothing to add to Colab Secrets.
 4. Optional: change `GENRE`, `MAX_PRICE`, and `SYSTEM` in Cell 1 to the student's own choices.
-5. Choose **Runtime → Run all**. Allow access to Google Drive when Colab asks. Cell 5 asks CheapShark about 5 games, so it takes about 15 seconds.
+5. Choose **Runtime → Run all**. Allow access to Google Drive when Colab asks. Cell 5 asks CheapShark about 5 games, so it takes about 20 seconds.
 
 ## Example output
 
